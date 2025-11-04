@@ -12,7 +12,13 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: process.env.NODE_ENV === 'development',
   logging: process.env.NODE_ENV === 'development' ? ['error', 'warn'] : false,
-  entities: ['src/entities/**/*.ts'],
-  migrations: ['src/migrations/**/*.ts']
+  // Load entities from dist/ in production, src/ in development
+  entities: process.env.NODE_ENV === 'production' 
+    ? ['dist/entities/**/*.js']
+    : ['src/entities/**/*.ts'],
+  // Load migrations from dist/ in production, src/ in development
+  migrations: process.env.NODE_ENV === 'production'
+    ? ['dist/migrations/**/*.js']
+    : ['src/migrations/**/*.ts']
 });
 

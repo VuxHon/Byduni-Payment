@@ -12,6 +12,7 @@ export default new DataSource({
   database: process.env.DB_NAME,
   synchronize: false,
   logging: true,
+  // Always use TypeScript files for migrations (run via ts-node)
   entities: ['src/entities/**/*.ts'],
   migrations: ['src/migrations/**/*.ts'],
   subscribers: ['src/subscribers/**/*.ts'],
