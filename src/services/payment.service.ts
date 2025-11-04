@@ -27,6 +27,15 @@ export class PaymentService {
     return await this.paymentRepository.save(payment);
   }
 
+  async checkTransactionExists(transactionId: string, user: string): Promise<boolean> {
+    const query = `
+    SELECT * FROM payment_transactions WHERE content like '%${user} ${transactionId}%'
+    `;
+    const result = await AppDataSource.query(query);
+    console.log(result);
+    return result.length > 0;
+  }
+
   /**
    * Lấy thanh toán theo ID
    */

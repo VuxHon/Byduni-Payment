@@ -144,7 +144,7 @@ export class PaymentController {
       }
 
       // Kiểm tra transaction ID có tồn tại trong Se Pay không
-      const exists = await this.sePayService.checkTransactionExists(id, user);
+      const exists = await this.paymentService.checkTransactionExists(id, user);
 
       return res.status(200).json({
         success: exists
